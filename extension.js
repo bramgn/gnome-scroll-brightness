@@ -41,14 +41,24 @@ export default class ScrollBrightnessExtension extends Extension {
         });
         this._indicator.add_child(icon);
 
-        this._indicator.connect('scroll-event', (actor, event) => this._onScroll(event));
+        this._scrollHandlerId = this._indicator.connect('scroll-event', (actor, event) => this._onScroll(event));
 
         Main.panel.addToStatusArea('scroll-brightness-indicator', this._indicator, 1, 'right');
     }
 
     disable() {
-        this._indicator?.destroy();
-        this._indicator = null;
+        if (this._indicator) {
+            if (this._scrollHandlerId) {
+                this._indicator.disconnect(this._scrollHandlerId);
+                this._scrollHandlerId = null;
+            }
+            this._indicator.destroy();
+            this._indicator = null;
+        }
+
+        this._device = null;
+        this._devicePath = null;
+        this._maxBrightness = null;
     }
 
     _getSessionPath() {
