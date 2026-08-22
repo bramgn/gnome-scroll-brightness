@@ -20,11 +20,7 @@ icon adjusts volume.
 
 ## Installation
 
-### From extensions.gnome.org
-
-Search for "Scroll Brightness" (once published) and install from there.
-
-### Manually
+Not published on extensions.gnome.org — install manually:
 
 ```sh
 git clone https://github.com/bramgn/gnome-scroll-brightness.git
