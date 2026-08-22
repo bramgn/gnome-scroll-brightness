@@ -1,0 +1,7 @@
+{
+  "uuid": "scroll-brightness@bramgn.github.io",
+  "name": "Scroll Brightness",
+  "description": "Scroll on the panel indicator to adjust screen backlight brightness, like volume scroll.",
+  "shell-version": ["45", "46", "47", "48", "49", "50"],
+  "url": "https://github.com/bramgn/gnome-scroll-brightness"
+}
