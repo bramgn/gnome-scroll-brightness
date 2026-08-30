@@ -10,6 +10,7 @@ import * as Main from 'resource:///org/gnome/shell/ui/main.js';
 const LOGIND_BUS_NAME = 'org.freedesktop.login1';
 const BACKLIGHT_DIR = '/sys/class/backlight';
 const STEP_PERCENT = 5; // percent per scroll click
+const MIN_PERCENT = 2; // never let it scroll down to a black screen
 
 function findBacklightDevice() {
     const dir = Gio.File.new_for_path(BACKLIGHT_DIR);
@@ -113,7 +114,7 @@ export default class ScrollBrightnessExtension extends Extension {
         try {
             const current = this._readInt(`${this._devicePath}/brightness`);
             const currentPercent = (current / this._maxBrightness) * 100;
-            const nextPercent = Math.max(0, Math.min(100, currentPercent + deltaPercent));
+            const nextPercent = Math.max(MIN_PERCENT, Math.min(100, currentPercent + deltaPercent));
             const nextRaw = Math.round((nextPercent / 100) * this._maxBrightness);
 
             const sessionPath = this._getSessionPath();
